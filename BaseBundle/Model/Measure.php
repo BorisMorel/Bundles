@@ -3,6 +3,7 @@
 namespace BOMO\BaseBundle\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use BOMO\BaseBundle\Validator\Constraints as BOMOAssert;
 
 class Measure
 {
@@ -36,6 +37,7 @@ class Measure
     /**
      * @Assert\Type("string")
      * @Assert\NotBlank()
+     * @BOMOAssert\DBExists(repository="bomo_base.repository.wizbii_user", field="id")
      */
     protected $wci;
 
@@ -122,6 +124,7 @@ class Measure
 
     /**
      * @Assert\Type("integer")
+     * @BOMOAssert\Config(target="qt")
      */
     protected $qt;
 
@@ -199,7 +202,7 @@ class Measure
     /**
      * Set dr
      *
-GG     * @param string $dr
+     * @param string $dr
      * @return $this
      */
     public function setDr($dr)
@@ -221,10 +224,9 @@ GG     * @param string $dr
     /**
      * Set wci
      *
-     * @param BOMO\BaseBundle\Document\Wci $wci
      * @return $this
      */
-    public function setWci(\BOMO\BaseBundle\Document\Wci $wci)
+    public function setWci($wci)
     {
         $this->wci = $wci;
         return $this;

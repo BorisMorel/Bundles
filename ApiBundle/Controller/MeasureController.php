@@ -64,8 +64,8 @@ class MeasureController extends FOSRestController implements ClassResourceInterf
     }
 
     /**
-     * @Annotations\Post("/collect2")
-     * @Annotations\View()
+     * @Annotations\Post("/collect")
+     * @Annotations\View(StatusCode="201")
      */
     public function postFormTypeAction(Request $request)
     {
@@ -117,6 +117,33 @@ class MeasureController extends FOSRestController implements ClassResourceInterf
         
         $formErrors = @BOMOUtil\FormError::getErrors($form);
         return $this->view(@BOMOUtil\OutputError::getOutput($formErrors), Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @Annotations\Get("/collect")
+     * @Annotations\View()
+     */
+    public function getAction(Request $request)
+    {
+        $params = $request->query->all();
+
+        if (isset($params['wci'])) {
+            $wizbiiCreator = $this
+                ->get('doctrine_mongodb')
+                ->getRepository('BOMOBaseBundle:WizbiiCreator')
+                ->findOneByName($params['wci'])
+                ;
+            
+            $params['wci'] = new \MongoId($wizbiiCreator->getId());
+        }
+
+        $results = $this
+            ->get('doctrine_mongodb')
+            ->getRepository('BOMOBaseBundle:Measure')
+            ->multipleSearch($params)
+            ;
+
+        return $results->toArray();
     }
 }
 

@@ -6,25 +6,23 @@ final class OutputError
 {
     public static function getOutput($errors)
     {
-        $temp = array();
+        $res = array();
 
         if (false === is_array($errors)) {
-            $errors = array(
+            $res = array(
                 'message' => $error
             );
         } else {
             foreach ($errors as $error) {
-                array_push($temp, array(
+                array_push($res, array(
                     'message' => $error
                 ));
             }
-
-            $errors = $temp;
         }
 
         return array(
             'success' => empty($errors),
-            'errors' => $errors
+            'errors' => $res
         );
     }
 }

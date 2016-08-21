@@ -1,0 +1,3 @@
+api_measure:
+    type: rest
+    resource: BOMO\ApiBundle\Controller\MeasureController

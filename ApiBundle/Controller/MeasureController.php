@@ -146,4 +146,3 @@ class MeasureController extends FOSRestController implements ClassResourceInterf
         return $results->toArray();
     }
 }
-

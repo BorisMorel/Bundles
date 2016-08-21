@@ -15,6 +15,11 @@ class WizbiiCreator
     protected $id;
 
     /**
+     * @MongoDB\Field(type="string")
+     */
+    protected $name;
+
+    /**
      * Get id
      *
      * @return id $id
@@ -22,5 +27,27 @@ class WizbiiCreator
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string $name
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

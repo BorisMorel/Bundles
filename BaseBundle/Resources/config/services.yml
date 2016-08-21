@@ -1,0 +1,16 @@
+parameters:
+    bomo_base.manager.config.class: BOMO\BaseBundle\Manager\ConfigManager
+    bomo_base.validator.config.class: BOMO\BaseBundle\Validator\Constraints\ConfigValidator    
+
+services:
+    bomo_base.manager.config:
+        class: %bomo_base.manager.config.class%
+        arguments:
+            - %startup_config%
+
+    bomo_base.validator.config:
+        class: %bomo_base.validator.config.class%
+        arguments:
+            - "@bomo_base.manager.config"
+        tags:
+            - { name: validator.constraint_validator }

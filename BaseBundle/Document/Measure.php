@@ -3,7 +3,6 @@
 namespace BOMO\BaseBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @MongoDB\Document
@@ -17,7 +16,6 @@ class Measure
 
     /**
      * @MongoDB\Field(type="string")
-     * @Assert\NotBlank()
      */
     protected $version;
 
